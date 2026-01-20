@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'get_started_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -9,15 +9,25 @@ class SplashPage extends StatelessWidget {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const LoginPage()),
+        MaterialPageRoute(builder: (_) => const GetStartedPage()),
       );
     });
 
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text(
-          'ShopEase',
-          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/logo1.jpeg', width: 120),
+            const SizedBox(height: 16),
+            const Text(
+              'ShopEase',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
         ),
       ),
     );

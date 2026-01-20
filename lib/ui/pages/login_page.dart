@@ -11,54 +11,112 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  bool isLoading = false;
+  final email = TextEditingController();
+  final password = TextEditingController();
+  bool loading = false;
 
-  void login() async {
-    setState(() => isLoading = true);
+  Future<void> login() async {
+    setState(() => loading = true);
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
+        email: email.text.trim(),
+        password: password.text.trim(),
       );
-
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const HomePage()),
       );
-    } on FirebaseAuthException catch (e) {
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.message ?? 'Login gagal')),
+        const SnackBar(content: Text('Login gagal')),
       );
     }
-    setState(() => isLoading = false);
+    setState(() => loading = false);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 60),
+            Image.asset('assets/images/logo1.jpeg', width: 90),
+            const SizedBox(height: 32),
+
             TextField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
+              controller: email,
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                prefixIcon: Icon(Icons.email),
+                border: OutlineInputBorder(),
+              ),
             ),
+            const SizedBox(height: 16),
+
             TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(labelText: 'Password'),
+              controller: password,
               obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Password',
+                prefixIcon: Icon(Icons.lock),
+                border: OutlineInputBorder(),
+              ),
             ),
-            const SizedBox(height: 20),
-            isLoading
+
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Fitur lupa password belum diaktifkan'),
+                    ),
+                  );
+                },
+                child: const Text('Lupa password?'),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            loading
                 ? const CircularProgressIndicator()
-                : ElevatedButton(
-                    onPressed: login,
-                    child: const Text('Login'),
+                : SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: login,
+                      child: const Text('Masuk'),
+                    ),
                   ),
+
+            const SizedBox(height: 16),
+            const Text('atau masuk dengan'),
+
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.g_mobiledata),
+                    label: const Text('Google'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.facebook),
+                    label: const Text('Facebook'),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 24),
             TextButton(
               onPressed: () {
                 Navigator.push(
@@ -66,8 +124,8 @@ class _LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(builder: (_) => const RegisterPage()),
                 );
               },
-              child: const Text('Belum punya akun? Register'),
-            )
+              child: const Text('Belum punya akun? Daftar'),
+            ),
           ],
         ),
       ),

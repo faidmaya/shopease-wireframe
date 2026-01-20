@@ -18,7 +18,7 @@ class Product {
       id: json['id'],
       title: json['title'],
       image: json['image'],
-      price: json['price'].toDouble(),
+      price: (json['price'] as num).toDouble(),
       description: json['description'],
     );
   }
