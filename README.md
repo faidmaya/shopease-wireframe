@@ -1,16 +1,14 @@
-# shopease
+Shopease - Aplikasi E-Commerce Flutter
 
-A new Flutter project.
+Shopease adalah aplikasi e-commerce berbasis Flutter yang dibuat untuk memudahkan pengguna berbelanja produk secara online. Aplikasi ini memiliki fitur registrasi, login, katalog produk, menambahkan produk ke keranjang dan melakukan checkout. Shopease mengambil data produk dari Fake Store API. Selain itu, aplikasi ini terhubung dengan Firebase untuk menyimpan data pengguna, autentikasi login/register, dan mempermudah manajemen akun. 
 
-## Getting Started
+Repository ini mencakup:
 
-This project is a starting point for a Flutter application.
+Minimal 5 halaman: Home, Katalog, Keranjang, Checkout, Profile
 
-A few resources to get you started if this is your first Flutter project:
+Fitur auth: Login & Register
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Menggunakan REST API (Fake Store API: https://fakestoreapi.com/
+)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Menggunakan state management (misal: Provider / Riverpod / Bloc)
